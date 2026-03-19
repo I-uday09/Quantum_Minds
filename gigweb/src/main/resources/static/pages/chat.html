@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat UI</title>
+
+<!-- Google Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f9ff;
+}
+
+/* Chat Area */
+.chat-box {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Message Common */
+/* Message Common */
+.msg {
+  max-width: 60%;
+  padding: 16px 20px;
+  margin: 12px;
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+
+  /* important */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* User Message */
+.user {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  color: white;
+  margin-left: auto;
+  text-align: right;
+
+  min-width: 80px;
+  max-width: 400px;
+}
+
+/* AI Message */
+.ai {
+  background: white;
+  color: black;
+  margin-right: auto;
+  border: 1px solid #ddd;
+
+  min-width: 80px;
+  max-width: 400px;
+}
+
+/* Input Area */
+.input-area {
+  display: flex;
+  padding: 15px;
+  background: white;
+  border-top: 1px solid #ddd;
+}
+
+/* Input Box */
+input {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 30px;
+  border: 3px solid black;   /* black border */
+  outline: none;
+  font-size: 16px;
+}
+
+/* Send Button */
+button {
+  margin-left: 10px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.material-icons {
+  font-size: 24px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-box" id="chatBox"></div>
+
+<div class="input-area">
+  <input id="msg" placeholder="Type message..." onkeypress="handleEnter(event)">
+  <button onclick="sendMsg()">
+    <span class="material-icons">send</span>
+  </button>
+</div>
+
+<script>
+function handleEnter(e) {
+  if (e.key === "Enter") {
+    sendMsg();
+  }
+}
+
+function sendMsg() {
+  let input = document.getElementById("msg");
+  let text = input.value.trim();
+  if (text === "") return;
+
+  let chatBox = document.getElementById("chatBox");
+
+  // User message
+  let userMsg = document.createElement("div");
+  userMsg.className = "msg user";
+  userMsg.innerText = text;
+  chatBox.appendChild(userMsg);
+
+  input.value = "";
+
+  // Fake AI reply (replace with backend later)
+  setTimeout(() => {
+    let aiMsg = document.createElement("div");
+    aiMsg.className = "msg ai";
+    aiMsg.innerText = "AI: " + text; // simple echo reply
+    chatBox.appendChild(aiMsg);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 500);
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+
+</body>
+</html>

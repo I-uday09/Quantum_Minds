@@ -1,0 +1,207 @@
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main {
+    display: flex;
+    height: 100vh;
+}
+
+/* ===== LEFT SIDE ===== */
+.sidebar {
+    width: 25%;
+    background: #1e1e2f;
+    color: white;
+    padding: 20px;
+}
+
+/* Buttons */
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #6a00ff;
+    color: white;
+
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background: #8c33ff;
+}
+
+/* ===== RIGHT SIDE ===== */
+.workspace {
+    width: 75%;
+    background: #f2f2f2;
+    padding: 20px;
+}
+
+/* PATH BAR */
+.path-bar {
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* ===== FILE AREA ===== */
+.file-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* FILE / FOLDER */
+.file {
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* ICON */
+.icon {
+    font-size: 40px;
+}
+
+/* NAME INPUT */
+.file input {
+    width: 90%;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid #555;
+    text-align: center;
+    background: transparent;
+}
+
+/* HOVER */
+.file:hover {
+    background: #ddd;
+    border-radius: 8px;/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main {
+    display: flex;
+    height: 100vh;
+}
+
+/* ===== LEFT SIDE (SIDEBAR) ===== */
+/* Sidebar buttons */
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: linear-gradient(135deg, #6a00ff, #b300ff);
+    color: white;
+
+    cursor: pointer;
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+/* Hover */
+.sidebar button:hover {
+    background: linear-gradient(135deg, #8c33ff, #cc33ff);
+    transform: scale(1.05);
+}
+
+/* ACTION BOXES */
+.action-box {
+    background: #6a00ff;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.action-box:hover {
+    background: #8c33ff;
+    transform: scale(1.05);
+}
+
+/* ===== RIGHT SIDE ===== */
+.workspace {
+    width: 75%;
+    background: #f2f2f2;
+    padding: 20px;
+}
+
+/* PATH BAR */
+.path-bar {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* ===== FILE AREA ===== */
+.file-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+/* FILE / FOLDER CARD */
+.file {
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* ICON */
+.icon {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+/* INPUT NAME */
+.file input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #555;
+    background: transparent;
+    text-align: center;
+    outline: none;
+}
+
+/* HOVER EFFECT */
+.file:hover {
+    background: #ddd;
+    transform: scale(1.05);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 800px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .sidebar, .workspace {
+        width: 100%;
+    }
+}
+}

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Udham Dashboard</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#e6f2ff;
+}
+
+/* NAVBAR */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 30px;
+  background:white;
+  box-shadow:0 2px 10px #ddd;
+  flex-wrap:wrap;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-weight:bold;
+  color:#2563eb;
+}
+
+/* HERO */
+.hero{
+  display:flex;
+  justify-content:space-between;
+  padding:60px;
+  background:#2563eb;
+  flex-wrap:wrap;
+  color:white;
+  
+}
+
+.hero h1{
+  font-size:40px;
+}
+
+.hero img{
+  max-width:100%;
+  height:auto;
+  width:40%;
+}
+
+.popup{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:white;
+  color:#2563eb;
+  padding:10px 15px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:bold;
+
+  z-index:9999; /* IMPORTANT */
+  transform:translateY(100px);
+  opacity:0;
+  animation:slideUp 0.8s ease forwards;
+  animation-delay:1s;
+}
+
+
+
+/* ANIMATION */
+@keyframes slideUp{
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* ANIMATION */
+@keyframes slideUp{
+  from{ bottom:-100px; opacity:0; }
+  to{ bottom:20px; opacity:1; }
+}
+
+/* BUTTON */
+.btn{
+  padding:10px 20px;
+  margin:10px;
+  border-radius:5px;
+  border:none;
+  cursor:pointer;
+}
+
+.blue{background:#2563eb;color:white;}
+.white{background:white;border:1px solid #ccc;}
+
+/* SERVICES */
+.services{
+  text-align:center;
+  padding:50px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 5px 15px #ddd;
+  height:200px;     
+  text-align:center;
+  margin:10px;
+  transition:0.3s;
+  border:1px solid transparent;
+  text-decoration:none;
+  color:black;
+}
+
+.card img{
+  width:60px;
+  margin-bottom:10px;
+}
+
+/* HOVER EFFECT */
+.card:hover{
+  transform:scale(1.05);
+  border:1px solid #2563eb;
+  box-shadow:0 10px 25px rgba(37,99,235,0.3);
+}
+
+/* BENEFITS */
+.benefits{
+  background:white;
+  margin:40px;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 15px #ccc;
+}
+
+.benefit-box{
+  position:relative;
+  border:2px solid orange;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+  overflow:hidden;
+  background:white;
+  height:15px;
+}
+
+/* CHARGING EFFECT */
+.benefit-box::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:0;
+  background:rgba(37,99,235,0.3); /* blue fill */
+  z-index:0;
+  transition:1s;
+}
+
+/* Different levels */
+.benefit-box:nth-child(2)::before{ width:80%; background:rgba(240, 125, 31, 0.51);}
+.benefit-box:nth-child(3)::before{ width:70%; background:hsla(271, 75%, 51%, 0.48); }
+.benefit-box:nth-child(4)::before{ width:90%; background:rgba(6, 250, 96, 0.62); }
+
+/* Keep text above */
+.benefit-box *{
+  position:relative;
+  z-index:1;
+}
+
+/* WHY */
+.why{
+  background:#ff6b3d;
+  padding:50px;
+  text-align:center;
+  color:white;
+}
+
+.why-box{
+  background:white;
+  color:black;
+  padding:30px;
+  border-radius:15px;
+  width:70%;
+  margin:auto;
+}
+
+/* ABOUT */
+.about-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+.about-box{
+  background:#f9fbff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 3px 10px #ddd;
+  border:1px solid #dbeafe;
+  transition:0.3s;
+  text-align:center;
+}
+
+.about-box img{
+  width:45px;
+  margin-bottom:8px;
+}
+
+.about-box h3{
+  font-size:16px;
+  margin:5px 0;
+}
+
+.about-box p{
+  font-size:13px;
+  color:#555;
+}
+
+.about-box:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(37,99,235,0.25);
+}
+
+@media (max-width:600px){
+  .hero{
+    flex-direction:column;
+    padding:30px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .why-box{
+    width:90%;
+  }
+  
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="logo">Hello! Udham</div>
+
+  <div style="display:flex;align-items:center;gap:15px;">
+    <div>Home | Products | Contact</div>
+    <img src="https://picsum.photos/40" style="border-radius:50%;">
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h1>The All-in-One Dashboard for Business Leaders</h1>
+    <p>Ask questions → Get insights instantly</p>
+    <button class="btn blue">Get Started</button>
+    <button class="btn white">Learn More</button>
+    
+  </div>
+
+  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+  
+  <div class="popup">
+  <img src="https://img.icons8.com/fluency/96/robot-2.png">
+  <span>Have a great day!</span>
+  </div>
+
+</div>
+
+<!-- SERVICES -->
+<div class="services">
+  <h2>Our Services - Smart Solutions for Your Business</h2>
+  
+  <div class="grid">
+
+  <a href="nlg.html" class="card">
+    <img src="https://img.icons8.com/fluency/96/chat.png">
+    <h3>Natural Language Query</h3>
+    <p>Ask questions in simple English and get insights.</p>
+  </a>
+
+  <a href="dash.html" class="card">
+    <img src="https://img.icons8.com/fluency/96/dashboard-layout.png">
+    <h3>Auto Dashboard</h3>
+    <p>Generate smart dashboards instantly.</p>
+  </a>
+
+  <a href="upload.html" class="card">
+    <img src="https://img.icons8.com/fluency/96/file.png">
+    <h3>CSV Upload</h3>
+    <p>Upload and analyze data easily.</p>
+  </a>
+
+  <a href="chat.html" class="card">
+    <img src="https://img.icons8.com/fluency/96/artificial-intelligence.png">
+    <h3>AI Insights</h3>
+    <p>Get intelligent business suggestions.</p>
+  </a>
+
+  <a href="realtime.html" class="card">
+    <img src="https://img.icons8.com/fluency/96/combo-chart.png">
+    <h3>Real-Time Analytics</h3>
+    <p>Track live performance.</p>
+  </a>
+
+  <a href="data.html" class="card">
+    <img src="https://img.icons8.com/fluency/96/database.png">
+    <h3>Data Management</h3>
+    <p>Organize your data efficiently.</p>
+  </a>
+
+</div>
+
+<div class="benefits">
+  <h3>Benefits</h3>
+
+  <div class="benefit-box">
+    <b>AI Review Response</b>
+    <span class="percent">85%</span>
+    <p>Quickly respond using AI</p>
+    <div class="progress">
+      <div class="progress-bar" style="width:85%"></div>
+    </div>
+  </div>
+
+  <div class="benefit-box" style="border-color:purple">
+    <b>GEO Rank Tracker</b>
+    <span class="percent">70%</span>
+    <p>Track ranking</p>
+    <div class="progress">
+      <div class="progress-bar" style="width:70%; background:purple;"></div>
+    </div>
+  </div>
+
+  <div class="benefit-box" style="border-color:green">
+    <b>Shared Inbox</b>
+    <span class="percent">90%</span>
+    <p>Manage communication</p>
+    <div class="progress">
+      <div class="progress-bar" style="width:90%; background:green;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- WHY -->
+<div class="why">
+  <div class="why-box">
+    <h2>Why choose us?</h2>
+    <p>Fast • Affordable • Reliable</p>
+    <button class="btn blue">Get Quote</button>
+  </div>
+</div>
+<!-- ABOUT -->
+<div class="about">
+  <h2>About Us</h2>
+  <p class="top-text">
+    We build smart data-driven solutions that help businesses grow faster,
+    make better decisions, and stay ahead in the digital world.
+  </p>
+
+  <div class="about-grid">
+
+    <div class="about-box">
+      <img src="https://img.icons8.com/fluency/96/code.png">
+      <h3>Expert Developer</h3>
+      <p>
+        Developed with modern technologies, focusing on performance,
+        simplicity, and user-friendly experience.
+      </p>
+    </div>
+
+
+    <div class="about-box">
+      <img src="https://img.icons8.com/fluency/96/security-checked.png">
+      <h3>Secure & Reliable</h3>
+      <p>
+        Your data is protected with strong security systems ensuring
+        privacy and reliability.
+      </p>
+    </div>
+
+    <div class="about-box">
+      <img src="https://img.icons8.com/fluency/96/customer-support.png">
+      <h3>Customer Support</h3>
+      <p>
+        Dedicated support to help you at every step and ensure
+        smooth experience.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

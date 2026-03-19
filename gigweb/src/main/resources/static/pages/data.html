@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>File Manager</title>
+<link rel="stylesheet" href="../css/fileManager.css">
+</head>
+
+<body>
+
+<div class="main">
+
+    <!-- LEFT SIDE (FIXED TOOLS) -->
+    <div class="sidebar">
+
+        <h3>Actions</h3>
+
+        <button onclick="createFolder()"> New Folder</button>
+        <button onclick="createFile()"> New File</button>
+        <button onclick="uploadFile()"> Open File</button>
+        <button onclick="uploadFile()"> Open Folder</button>
+    </div>
+
+    <!-- RIGHT SIDE (WORK AREA) -->
+    <div class="workspace">
+
+        <!-- PATH BAR -->
+        <div class="path-bar">
+            path/
+        </div>
+
+        <!-- FILE AREA -->
+        <div class="file-area">
+
+            <!-- Example Folder -->
+            <div class="file">
+                <div class="icon">📁</div>
+                <input placeholder="Folder Name">
+            </div>
+
+            <!-- Example File -->
+            <div class="file">
+                <div class="icon">📄</div>
+                <input placeholder="File Name">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

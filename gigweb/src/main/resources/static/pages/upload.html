@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Upload CSV</title>
+
+<!-- External CSS -->
+<link rel="stylesheet" href="../css/u1.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+<body>
+
+<h2>Upload CSV</h2>
+
+<input type="file" id="file">
+<br><br>
+
+<select id="chartType">
+  <option value="bar">Bar Chart</option>
+  <option value="pie">Pie Chart</option>
+  <option value="line">Line Chart</option>
+</select>
+
+<br><br>
+
+<button onclick="upload()">Upload & Show Chart</button>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>

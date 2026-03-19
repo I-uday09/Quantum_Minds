@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Signup</title>
+
+<style>
+body {
+  background: linear-gradient(135deg,#ff00cc,#333399);
+  text-align:center;
+  color:white;
+}
+
+.box {
+  background:white;
+  color:black;
+  width:320px;
+  margin:100px auto;
+  padding:20px;
+  border-radius:10px;
+}
+
+input,button {
+  width:90%;
+  margin:10px;
+  padding:10px;
+}
+
+button {
+  background:#ff00cc;
+  color:white;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Signup</h2>
+
+<input id="signupUsername" placeholder="Username">
+<input id="signupEmail" placeholder="Email">
+<input type="password" id="signupPassword" placeholder="Password">
+
+<button onclick="signup()">Signup</button>
+
+<p id="signupMsg"></p>
+
+<a href="login.html">Back to Login</a>
+</div>
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>
