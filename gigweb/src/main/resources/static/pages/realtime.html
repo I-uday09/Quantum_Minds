@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advanced Business Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg,#0f172a,#1e293b);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  margin-top: 30px;
+}
+
+textarea {
+  width: 500px;
+  height: 120px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+button {
+  padding: 12px 20px;
+  background: #22c55e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+table {
+  margin: 30px auto;
+  border-collapse: collapse;
+  background: white;
+  color: black;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 10px 15px;
+}
+
+th {
+  background: #ddd;
+}
+
+.profit { color: green; font-weight: bold; }
+.loss { color: red; font-weight: bold; }
+
+.summary {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+canvas {
+  margin-top: 20px;
+  background: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>📊 Smart Business Dashboard</h2>
+
+  <p><b>Format:</b> Item CP SP Quantity</p>
+  <p>Example: apple 50 80 10</p>
+
+  <textarea id="input" placeholder="Enter multiple items..."></textarea><br>
+  <button onclick="generate()">Generate Dashboard</button>
+</div>
+
+<div id="error" style="color:red;"></div>
+
+<table id="table"></table>
+
+<div class="summary" id="summary"></div>
+
+<canvas id="chart" width="600" height="300"></canvas>
+
+<script>
+let chart;
+
+function generate() {
+  const text = document.getElementById("input").value.trim();
+  const lines = text.split("\n");
+
+  let items=[], cp=[], sp=[], qty=[], profit=[], loss=[];
+  let totalProfit=0, totalLoss=0;
+  let errorMsg = "";
+
+  lines.forEach((line, index) => {
+    let parts = line.trim().split(/\s+/);
+
+    if (parts.length !== 4) {
+      errorMsg += "Line " + (index+1) + " गलत है\n";
+      return;
+    }
+
+    let item = parts[0];
+    let c = parseFloat(parts[1]);
+    let s = parseFloat(parts[2]);
+    let q = parseFloat(parts[3]);
+
+    if (isNaN(c) || isNaN(s) || isNaN(q)) {
+      errorMsg += "Line " + (index+1) + " में number गलत है\n";
+      return;
+    }
+
+    let p=0,l=0;
+
+    if (s > c) {
+      p = (s - c) * q;
+      totalProfit += p;
+    } else {
+      l = (c - s) * q;
+      totalLoss += l;
+    }
+
+    items.push(item);
+    cp.push(c);
+    sp.push(s);
+    qty.push(q);
+    profit.push(p);
+    loss.push(l);
+  });
+
+  document.getElementById("error").innerText = errorMsg;
+
+  createTable(items, cp, sp, profit, loss, qty);
+  createChart(items, profit, loss);
+
+  document.getElementById("summary").innerHTML =
+    "Total Profit: <span class='profit'>" + totalProfit + "</span> | " +
+    "Total Loss: <span class='loss'>" + totalLoss + "</span>";
+}
+
+function createTable(items, cp, sp, profit, loss, qty) {
+  let html = `
+    <tr>
+      <th>Item</th>
+      <th>CP</th>
+      <th>SP</th>
+      <th>Quantity</th>
+      <th>Profit</th>
+      <th>Loss</th>
+    </tr>
+  `;
+
+  for (let i = 0; i < items.length; i++) {
+    html += `
+      <tr>
+        <td>${items[i]}</td>
+        <td>${cp[i]}</td>
+        <td>${sp[i]}</td>
+        <td>${qty[i]}</td>
+        <td class="profit">${profit[i]}</td>
+        <td class="loss">${loss[i]}</td>
+      </tr>
+    `;
+  }
+
+  document.getElementById("table").innerHTML = html;
+}
+
+function createChart(items, profit, loss) {
+  const ctx = document.getElementById("chart");
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: items,
+      datasets: [
+        { label: 'Profit', data: profit },
+        { label: 'Loss', data: loss }
+      ]
+    }
+  });
+}
+</script>
+
+</body>
+</html>

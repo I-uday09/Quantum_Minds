@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NLG to Table</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  margin-top: 40px;
+}
+
+input {
+  width: 400px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 12px 20px;
+  margin-left: 10px;
+  background: #22c55e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+canvas {
+  margin-top: 30px;
+  background: white;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Natural Language → Table</h2>
+  <input type="text" id="query" placeholder="Enter: apple 12 123 mango 23 22">
+  <button onclick="processQuery()">Generate Table</button>
+</div>
+
+<canvas id="canvas" width="800" height="400"></canvas>
+
+<script>
+function processQuery() {
+  const input = document.getElementById("query").value.trim();
+  const tokens = input.split(/\s+/);
+
+  let rows = [];
+  let currentRow = [];
+
+  tokens.forEach(token => {
+    if (isNaN(token)) {
+      // New row starts
+      if (currentRow.length > 0) {
+        rows.push(currentRow);
+      }
+      currentRow = [token];
+    } else {
+      currentRow.push(token);
+    }
+  });
+
+  if (currentRow.length > 0) {
+    rows.push(currentRow);
+  }
+
+  // Find max columns
+  let maxCols = 0;
+  rows.forEach(r => {
+    if (r.length > maxCols) maxCols = r.length;
+  });
+
+  // Add headers dynamically
+  let header = ["Item"];
+  for (let i = 1; i < maxCols; i++) {
+    header.push("Value " + i);
+  }
+
+  let tableData = [header, ...rows];
+
+  drawTable(tableData);
+}
+
+function drawTable(data) {
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const cellWidth = 120;
+  const cellHeight = 40;
+
+  for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[i].length; j++) {
+
+      let x = j * cellWidth;
+      let y = i * cellHeight;
+
+      // Draw cell border
+      ctx.strokeStyle = "#000";
+      ctx.strokeRect(x, y, cellWidth, cellHeight);
+
+      // Fill header
+      if (i === 0) {
+        ctx.fillStyle = "#ddd";
+        ctx.fillRect(x, y, cellWidth, cellHeight);
+      }
+
+      // Text
+      ctx.fillStyle = "black";
+      ctx.font = "14px Arial";
+      ctx.fillText(data[i][j], x + 10, y + 25);
+    }
+  }
+}
+</script>
+
+</body>
+</html>

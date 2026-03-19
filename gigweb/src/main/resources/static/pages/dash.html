@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Auto Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+input {
+  padding: 10px;
+  width: 400px;
+}
+canvas {
+  background: white;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Auto Dashboard Generator</h2>
+
+<input type="text" id="query" placeholder="apple 100 mango 200 banana 150">
+<button onclick="generateDashboard()">Generate</button>
+
+<canvas id="chart" width="400" height="200"></canvas>
+
+<script>
+function generateDashboard() {
+  const input = document.getElementById("query").value.trim();
+  const tokens = input.split(/\s+/);
+
+  let labels = [];
+  let values = [];
+
+  for (let i = 0; i < tokens.length; i++) {
+    if (isNaN(tokens[i])) {
+      labels.push(tokens[i]);
+      values.push(parseFloat(tokens[i+1]) || 0);
+      i++;
+    }
+  }
+
+  createChart(labels, values);
+}
+
+function createChart(labels, values) {
+  const ctx = document.getElementById("chart");
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Data',
+        data: values
+      }]
+    }
+  });
+}
+</script>
+
+</body>
+</html>
